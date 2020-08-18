@@ -5,8 +5,22 @@ export class CoursesController {
 
   @Get()
   findAll():any{
-    return{
-      message:'Good Guy Yay'
-    };
+    return[
+      {
+        id:'100',
+        number:'01204111',
+        title:'Computer and Programming'
+      },
+      {
+        id:'200',
+        number:'01204553',
+        title:'Asdfs of sdaasdaff'
+      },
+      {
+        id:'300',
+        number:'01202335',
+        title:'Lalaban'
+      }
+    ]
   }
 }
