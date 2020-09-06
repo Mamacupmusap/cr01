@@ -1,4 +1,4 @@
-import  Course  from './entities/course.entity';
+import  Course  from './course.entity';
 import { CoursesService } from './courses.service';
 import { Get, Controller } from '@nestjs/common';
 
