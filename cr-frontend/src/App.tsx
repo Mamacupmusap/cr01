@@ -3,6 +3,7 @@ import './App.css';
 import {Course} from './interfaces'
 import CourseItem from './components/CourseItem';
 import NewCourseForm from './components/NewCourseForm';
+import coursesService from './services/CoursesService';
 
 const App =() =>{
   const [courses,setCourses] = useState<Course[]>([]);
@@ -12,13 +13,20 @@ const App =() =>{
     setFormVisible(!formVisible);
   }
 
-  useEffect(() =>{
-    fetch('http://localhost:3000/courses')
-    .then(res=>res.json())
+  const fetchCourses = () => {
+    coursesService.fetchCourse()
     .then(courses =>{
       console.log(courses);
       setCourses(courses);
     });
+  }
+
+  const handleNewCourseCreated = (course : Course)=>{
+      fetchCourses();
+      setFormVisible(false);
+  }
+  useEffect(() =>{
+    fetchCourses();
   },[]);
 
   return(
@@ -29,7 +37,7 @@ const App =() =>{
         ))}
       </ul>
       <button onClick={toggleFormVisible}>New course</button>
-      {formVisible && <NewCourseForm/>}
+      {formVisible && <NewCourseForm onNewCourseCreated={handleNewCourseCreated}/>}
     </div>
   );
 }
